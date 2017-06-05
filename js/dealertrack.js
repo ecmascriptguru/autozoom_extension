@@ -18,7 +18,7 @@ let DealerTrack = (function() {
         let residence_stability = doc.getElementById("app_ownership_type").value;
         let residence_time = {
             year: doc.getElementById("app_years_at_address").value,
-            month: doc.getElementById("app_months_at_address").value
+            month: doc.getElementById("app_months_at_address").value || 0
         };
         let prev_residence_time = {
             year: doc.getElementById("app_prv_years_at_address").value || 0,
@@ -26,14 +26,14 @@ let DealerTrack = (function() {
         }
         let time_in_area = 2017 - parseInt(doc.getElementById("app_birth_year").value);
         let job_stability = {
-            year: doc.getElementById("app_years_employed").value,
-            month: doc.getElementById("app_months_employed").value
+            year: doc.getElementById("app_years_employed").value || 0,
+            month: doc.getElementById("app_months_employed").value || 0
         };
         let prev_job_stability = {
             year: doc.getElementById("app_prv_years_employed").value || 0,
-            month: doc.getElementById("app_months_employed").value || 0
+            month: doc.getElementById("app_prv_months_employed").value || 0
         };
-        let type_of_employeement = (doc.getElementById("app_salary").value || 0) + (doc.getElementById("app_other_income").value || 0);
+        let type_of_employeement = parseInt(doc.getElementById("app_salary").value || 0) + parseInt(doc.getElementById("app_other_income").value || 0);
         let lagniappe = "neutral";
 
 		let credit_score = (parseInt(doc.getElementsByName('a_exp_score')[0].value) + parseInt(doc.getElementsByName('a_equ_score')[0].value)) / 2;

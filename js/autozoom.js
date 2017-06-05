@@ -37,7 +37,7 @@ let AutoZoom = (function() {
         //  6. Number on Residence changes last 3 years
         let prevResidenceTime = data.residence_time;
         let prevResMonths = parseInt(prevResidenceTime.year) * 12 + parseInt(prevResidenceTime.month);
-        let resChangesIndex = (resMonths > 36) ? 4 : ((resMonths + prevResMonths > 36) ? 3 : 2);
+        let resChangesIndex = (resMonths > 36) ? 4 : ((resMonths + prevResMonths > 37) ? 3 : 2);
         
         $(".category-row").eq(2).find(".category-range-selector span").eq(resChangesIndex).click();
 
@@ -76,7 +76,7 @@ let AutoZoom = (function() {
         //  9. Number of job changes last 2 years
         let prevJobStability = data.prev_job_stability;
         let prevJobMonths = parseInt(prevJobStability.year) * 12 + parseInt(prevJobStability.month);
-        let jobChangesIndex = (jobMonths > 24) ? 4 : ((jobMonths + prevJobMonths > 36) ? 3 : 2);
+        let jobChangesIndex = (jobMonths > 24) ? 4 : ((jobMonths + prevJobMonths > 24) ? 3 : 2);
         $(".category-row").eq(5).find(".category-range-selector span").eq(jobChangesIndex).click();
 
         //  10. Type of employment = Skilled Hourly
@@ -138,13 +138,19 @@ let AutoZoom = (function() {
 	let fill = (data) => {
         //  1. Copy / Paste First & Last Name
 		$("form input").eq(0).val(data.first_name);
+        $("form input").eq(0)[0].dispatchEvent(new Event("input"));
         $("form input").eq(2).val(data.last_name);
-
-        //  2. Location - Lot 2 Rochester
-        $("form select").eq(1).val(data.location).change();
+        $("form input").eq(2)[0].dispatchEvent(new Event("input"));
 
         //  3. Status: Application
         $("form select").eq(4).val(data.status).change();
+        $("form select").eq(4)[0].dispatchEvent(new Event("change"));
+
+        //  2. Location - Lot 2 Rochester
+        $("form select").eq(1).val(data.location).change();
+        $("form select").eq(1)[0].dispatchEvent(new Event("change"));
+
+        
 
         timer = setInterval(() => {
             if ( $(".category-row").length > 0 &&  $(".category-row").eq(17).find(".category-range-selector span").length > 0) {

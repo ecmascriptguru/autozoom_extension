@@ -1,5 +1,6 @@
 .wrapper {
-    min-width: 352px;}
+    min-width: 352px;
+    background-color: red;}
     .wrapper table.list {
         width: 100%;
         padding: 0;}
